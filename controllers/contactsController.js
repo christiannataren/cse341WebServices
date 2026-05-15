@@ -1,27 +1,32 @@
 const controller = {}
+const e = require("express");
 const contacts = require("../models/contacts.js")
 
 
 
 
 controller.getByID = async function (req, res, next) {
-    let id = req.params.id;
-    let contact = undefined;
+    let { id } = req.params;
     try {
-        contact = await contacts.getByID(id);
+        let contact = await contacts.getByID(id);
+        if (contact) {
+            res.status(200).json(contact);
+        } else {
+            next({ message: "User NOT FOUND" })
+        }
     } catch (error) {
+        next(error)
+    }
 
-    }
-    if (contact != undefined) {
-        res.status(200).json(contact);
-    } else {
-        res.sendStatus(404);
-    }
 }
 
 controller.getAll = async function (req, res, next) {
-    let data = await contacts.getContacts();
-    res.status(200).json(data);
+    try {
+        let data = await contacts.getContacts();
+        res.status(200).json(data);
+    } catch (error) {
+        next({ message: "Fail fetching contacts" })
+    }
 }
 
 controller.insert = async function (req, res, next) {

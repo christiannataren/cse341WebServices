@@ -7,6 +7,17 @@ const routeContacts = require("./routes/contactsRoute.js")
 
 app.use("/contacts", routeContacts)
 
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(err.status || 500).json({
+        error: {
+            message: err.message || "Internal Server Error",
+        }
+    });
+});
+
+
+
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
