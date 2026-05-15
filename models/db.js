@@ -33,6 +33,11 @@ db.getCollection = async function (collection) {
     return col;
 }
 
+db.updateByID = async function (collection, id, data) {
+    const col = await db.getCollection(collection);
+    let result = await col.updateOne({ _id: new ObjectId(id) }, { $set: data })
+    return result;
+}
 
 db.getByID = async function (collection, id) {
     const col = await db.getCollection(collection);

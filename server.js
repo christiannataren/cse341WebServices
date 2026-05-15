@@ -4,7 +4,7 @@ const express = require('express')
 const app = express()
 const routeContacts = require("./routes/contactsRoute.js")
 
-
+app.use(express.json())
 app.use("/contacts", routeContacts)
 
 app.use((err, req, res, next) => {
