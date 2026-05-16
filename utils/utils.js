@@ -2,11 +2,13 @@
 
 utils = {}
 
-utils.sendMessage = function (message) {
-    console.log(message.constructor)
+utils.constructError = function (message, error = 500) {
+    // console.log(message.constructor)
+
     message = message.errors || message
     return {
-        message: message
+        message: message,
+        status: error
     }
 }
 

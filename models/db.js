@@ -44,6 +44,11 @@ db.getByID = async function (collection, id) {
     let result = await col.findOne({ _id: new ObjectId(id) });
     return result;
 }
+db.deleteByID = async function (collection, id) {
+    const col = await db.getCollection(collection);
+    let result = await col.deleteOne({ _id: new ObjectId(id) });
+    return result;
+}
 
 db.insertData = async function (collection, data) {
     const col = await db.getCollection(collection);
