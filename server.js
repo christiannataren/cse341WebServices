@@ -3,9 +3,15 @@ const db = require("./models/db.js")
 const express = require('express')
 const app = express()
 const routeContacts = require("./routes/contactsRoute.js")
+const routeSwagger = require("./routes/swagger.js")
 
 app.use(express.json())
+
+
 app.use("/contacts", routeContacts)
+
+app.use("/", routeSwagger)
+
 
 app.use((err, req, res, next) => {
     console.error(err.stack);

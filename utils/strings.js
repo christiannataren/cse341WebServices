@@ -1,15 +1,25 @@
-strings = {}
+const strings = {};
 
-strings.ERROR_CREATING_CO = "Error while creating contact"
+// General Errors
+strings.ERROR_CREATING_CONTACT = "Error creating contact";
+strings.CONTACT_NOT_FOUND = "Contact not found";
 
-strings.NAME_NOT_EMPTY = "FirstName must not be empty"
-strings.LASTNAME_NOT_EMPTY = "LastName must not be empty"
-strings.COLOR_NOT_EMPTY = "Favorite color must not be empty"
-strings.EMAIL_NOT_EMPTY = "Email must not be empty"
-strings.BIRTHDAY_NOT_EMPTY = "Birthday must not be empty"
-strings.EMAIL_BAD_FORMAT = "Email format is incorrect"
-strings.BIRTHDAY_BAD_FORMAT = "'Format must be YYYY-MM-DD'"
+// Validation Messages
+strings.NAME_NOT_EMPTY = "First name is required";
+strings.LASTNAME_NOT_EMPTY = "Last name is required";
+strings.COLOR_NOT_EMPTY = "Favorite color is required";
+strings.EMAIL_NOT_EMPTY = "Email is required";
+strings.BIRTHDAY_NOT_EMPTY = "Birthday is required";
 
+// Format Errors
+strings.EMAIL_BAD_FORMAT = "Invalid email format";
+strings.BIRTHDAY_BAD_FORMAT = "Date format must be YYYY-MM-DD";
+
+// Success/Fail Messages
+strings.CONTACT_UPDATED = "Contact updated successfully";
+strings.CONTACT_FAIL_UPDATED = "Error updating contact";
+strings.CONTACT_DELETED = "Contact deleted successfully";
+strings.CONTACT_DELETED_FAIL = "Error deleting contact";
 
 
 module.exports = strings;

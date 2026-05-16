@@ -26,6 +26,10 @@ model.getContacts = async function () {
     return data;
 }
 
+model.deleteContact = async function (id) {
+    let data = await db.deleteByID(collection, id)
+    return data;
+}
 
 module.exports = model
 
