@@ -1,6 +1,8 @@
 const controller = {}
 const e = require("express");
 const contacts = require("../models/contacts.js")
+const utils = require("../utils/utils.js")
+
 
 
 
@@ -19,6 +21,27 @@ controller.getByID = async function (req, res, next) {
     }
 
 }
+controller.updateContact = async function (req, res, next) {
+    if (req.is("application/json")) {
+        let { id } = req.params;
+        try {
+            let contact = await contacts.getByID(id);
+            if (contact) {
+                let sanContact = utils.sanitizeContact(req)
+                let update = await contacts.updateContact(id, sanContact)
+
+                res.status(200).json(update);
+            } else {
+                next({ message: "User NOT FOUND" })
+            }
+        } catch (error) {
+            next(error)
+        }
+    } else {
+        next(utils.sendMessage("Unsupported format"))
+    }
+
+}
 
 controller.getAll = async function (req, res, next) {
     try {
@@ -29,6 +52,27 @@ controller.getAll = async function (req, res, next) {
     }
 }
 
+
+controller.create = async function (req, res, next) {
+    if (req.is("application/json")) {
+        let contact = utils.sanitizeContact(req)
+        try {
+            let id = await contacts.insertData(contact);
+            if (id) {
+                res.status(200).json(id)
+            } else {
+                next(strings.ERROR_CREATING_CONTACT)
+            }
+        } catch (error) {
+            next(error)
+        }
+
+    } else {
+        next(utils.sendMessage("Unsupported format"))
+    }
+
+
+}
 controller.insert = async function (req, res, next) {
     // const dummyData = [
     //     { firstName: "Liam", lastName: "Smith", email: "liam.smith@example.com", favoriteColor: "blue", birthday: "1990-01-15" },

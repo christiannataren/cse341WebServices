@@ -17,7 +17,10 @@ model.insertData = async function (data) {
     const result = await db.insertData(collection, data);
     return result;
 }
-
+model.updateContact = async function (id, data) {
+    let result = await db.updateByID(collection, id, data)
+    return result;
+}
 model.getContacts = async function () {
     let data = await db.getAll(collection);
     return data;
